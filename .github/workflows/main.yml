@@ -17,3 +17,5 @@ jobs:
         env:
           lc: ${{ secrets.lc }}
           tk: ${{ secrets.tk }}
+          WXPusherAppToken: ${{ secrets.WXPusherAppToken }}
+          WXPusherUIDS: ${{ secrets.WXPusherUIDS }}
