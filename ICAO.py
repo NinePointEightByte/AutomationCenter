@@ -28,4 +28,5 @@ wxpusherResponse = requests.post('https://wxpusher.zjiecode.com/api/send/message
 if not wxpusherResponse.json()['code'] == 1000:
     print(wxpusherResponse.text)
 
+print(type(os.environ.get('WXPusherUIDS')))
 print(textReturned)
