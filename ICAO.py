@@ -16,4 +16,9 @@ if response.text == '<ns:testScoremesstkResponse xmlns:ns="http://pepec.icss.com
 
 root = xml.etree.ElementTree.fromstring(response.text)
 textReturned = json.loads(root[0].text)['result']
+requests.post('https://wxpusher.zjiecode.com/api/send/message', {
+    'appToken': 'AT_8YbOlcR7m3vFnAnqoMa0htReTyLBYfql',
+    'content': '<h1>H1标题</h1><br/><p style=\"color:red;\">{}</p>'.format(textReturned),
+    'contentType': 2
+})
 print(textReturned)
