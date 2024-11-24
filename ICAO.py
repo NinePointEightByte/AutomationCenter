@@ -23,7 +23,7 @@ wxpusherResponse = requests.post('https://wxpusher.zjiecode.com/api/send/message
                                      'content': '<h1>H1标题</h1><br/><p style=\"color:red;\">{}</p>'.format(textReturned),
                                      'summary': textReturned,
                                      'contentType': 2,
-                                     'uids': ['UID_9NIdMsIV3N9Q5hELYoRCowbaKOP9']
+                                     'uids': os.environ.get('WXPusherUIDS')
                                  })
 if not wxpusherResponse.json()['code'] == 1000:
     print(wxpusherResponse.text)
