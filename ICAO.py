@@ -19,11 +19,11 @@ textReturned = json.loads(root[0].text)['result']
 wxpusherResponse = requests.post('https://wxpusher.zjiecode.com/api/send/message',
                                  headers={'Content-Type': 'application/json'},
                                  json={
-                                     'appToken': os.environ.get('WXPusherAppToken'),
+                                     'appToken': os.environ.get('WXPUSHERAPPTOKEN'),
                                      'content': '<h1>H1标题</h1><br/><p style=\"color:red;\">{}</p>'.format(textReturned),
                                      'summary': textReturned,
                                      'contentType': 2,
-                                     'uids': os.environ.get('WXPusherUIDS')
+                                     'uids': os.environ.get('WXPUSHERUIDS')
                                  })
 if not wxpusherResponse.json()['code'] == 1000:
     print(wxpusherResponse.text)
