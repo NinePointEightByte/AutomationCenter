@@ -4,6 +4,9 @@ import os
 import requests
 import xml.etree.ElementTree
 
+reload(sys) 
+sys.setdefaultencoding('utf8')   
+
 lc = os.environ.get('lc')
 tk = os.environ.get('tk')
 url = 'https://fsop.caac.gov.cn/g13/jsyzzapp/services/examFace/testScoremesstk?licenum=' + lc + '&messid=' + tk
