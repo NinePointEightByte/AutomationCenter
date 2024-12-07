@@ -21,7 +21,7 @@ wxpusherResponse = requests.post('https://wxpusher.zjiecode.com/api/send/message
                                  json={
                                      'appToken': os.environ.get('WXPusherAppToken'),
                                      'content': '<h1 style=\"color:blue;\">{}</p>'.format(textReturned),
-                                     'summary': 'ICAO：' + str(textReturned),
+                                     'summary': textReturned,
                                      'contentType': 2,
                                      'uids': eval(os.environ.get('WXPusherUIDS'))
                                  })
