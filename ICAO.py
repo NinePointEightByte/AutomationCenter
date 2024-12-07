@@ -51,13 +51,13 @@ elif textReturned['data']:
         else:
             wxpusherResponse = requests.post('https://wxpusher.zjiecode.com/api/send/message',
                                              headers={'Content-Type': 'application/json'},
-                                            json={
-                                                 'appToken': os.environ.get('WXPusherAppToken'),
-                                                 'content': '<h1 style=\"color:blue;\">{}</p>'.format(textReturned),
-                                                 'summary': 'ICAO：未查询到' + os.environ.get('EXAMDATE') + '成绩信息',
-                                                 'contentType': 2,
-                                                 'uids': eval(os.environ.get('WXPusherUIDS'))
-                                            })
+                                             json={
+                                                  'appToken': os.environ.get('WXPusherAppToken'),
+                                                  'content': '<h1 style=\"color:blue;\">{}</p>'.format(textReturned),
+                                                  'summary': 'ICAO：未查询到成绩信息',
+                                                  'contentType': 2,
+                                                  'uids': eval(os.environ.get('WXPusherUIDS'))
+                                             })
             if not wxpusherResponse.json()['code'] == 1000:
                 print(wxpusherResponse.text)
                 sys.exit("WxPusher报错")
