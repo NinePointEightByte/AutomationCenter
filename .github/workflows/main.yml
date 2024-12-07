@@ -2,8 +2,10 @@ on:
   push:
   workflow_dispatch:
   schedule:
-  - cron: "0 3 * * *"
-  - cron: "0 15 * * *"
+  - cron: "0 4 * * *"
+  - cron: "0 12 * * *"
+  - cron: "0 13 * * *"
+  - cron: "0 14 * * *"
   
 jobs:
   run:
@@ -20,3 +22,4 @@ jobs:
           tk: ${{ secrets.tk }}
           WXPusherAppToken: ${{ secrets.WXPusherAppToken }}
           WXPusherUIDS: ${{ secrets.WXPusherUIDS }}
+          EXAMDATE: ${{ secrets.EXAMDATE }}
