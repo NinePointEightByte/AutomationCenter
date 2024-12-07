@@ -16,6 +16,7 @@ if response.text == '<ns:testScoremesstkResponse xmlns:ns="http://pepec.icss.com
 
 root = xml.etree.ElementTree.fromstring(response.text)
 textReturned = json.loads(root[0].text)['result']
+print(textReturned)
 wxpusherResponse = requests.post('https://wxpusher.zjiecode.com/api/send/message',
                                  headers={'Content-Type': 'application/json'},
                                  json={
