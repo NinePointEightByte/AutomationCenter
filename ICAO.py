@@ -30,7 +30,7 @@ if textReturned == '未查询到成绩信息':
         print(wxpusherResponse.text)
         sys.exit("WxPusher报错")
     print(textReturned)
-    return
+    exit()
 elif textReturned['data']:
     for result in textReturned['data']:
         if result['EXAM_DATE'] == os.environ.get('EXAMDATE'):
@@ -47,6 +47,6 @@ elif textReturned['data']:
                 print(wxpusherResponse.text)
                 sys.exit("WxPusher报错")
             print(textReturned)
-            return
+            exit()
 print(textReturned)
 sys.exit('程序异常结束')
