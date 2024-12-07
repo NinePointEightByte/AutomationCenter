@@ -16,18 +16,37 @@ if response.text == '<ns:testScoremesstkResponse xmlns:ns="http://pepec.icss.com
 
 root = xml.etree.ElementTree.fromstring(response.text)
 textReturned = json.loads(root[0].text)['result']
+if textReturned == '未查询到成绩信息':
+    wxpusherResponse = requests.post('https://wxpusher.zjiecode.com/api/send/message',
+                                     headers={'Content-Type': 'application/json'},
+                                     json={
+                                         'appToken': os.environ.get('WXPusherAppToken'),
+                                         'content': '<h1 style=\"color:blue;\">{}</p>'.format(textReturned),
+                                         'summary': 'ICAO：未查询到成绩信息',
+                                         'contentType': 2,
+                                         'uids': eval(os.environ.get('WXPusherUIDS'))
+                                     })
+    if not wxpusherResponse.json()['code'] == 1000:
+        print(wxpusherResponse.text)
+        sys.exit("WxPusher报错")
+    print(textReturned)
+    return
+elif textReturned['data']:
+    for result in textReturned['data']:
+        if result['EXAM_DATE'] == os.environ.get('EXAMDATE'):
+            wxpusherResponse = requests.post('https://wxpusher.zjiecode.com/api/send/message',
+                                             headers={'Content-Type': 'application/json'},
+                                             json={
+                                                 'appToken': os.environ.get('WXPusherAppToken'),
+                                                 'content': '<h1 style=\"color:red;\">{}</p>'.format(result),
+                                                 'summary': os.environ.get('EXAMDATE') + '考试成绩：' + result['SCORE'],
+                                                 'contentType': 2,
+                                                 'uids': eval(os.environ.get('WXPusherUIDS'))
+                                             })
+            if not wxpusherResponse.json()['code'] == 1000:
+                print(wxpusherResponse.text)
+                sys.exit("WxPusher报错")
+            print(textReturned)
+            return
 print(textReturned)
-wxpusherResponse = requests.post('https://wxpusher.zjiecode.com/api/send/message',
-                                 headers={'Content-Type': 'application/json'},
-                                 json={
-                                     'appToken': os.environ.get('WXPusherAppToken'),
-                                     'content': '<h1 style=\"color:blue;\">{}</p>'.format(textReturned),
-                                     'summary': textReturned,
-                                     'contentType': 2,
-                                     'uids': eval(os.environ.get('WXPusherUIDS'))
-                                 })
-if not wxpusherResponse.json()['code'] == 1000:
-    print(wxpusherResponse.text)
-    sys.exit("WxPusher报错")
-
-print(textReturned)
+sys.exit('程序异常结束')
