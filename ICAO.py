@@ -22,7 +22,7 @@ if textReturned == '未查询到成绩信息':
                                      json={
                                          'appToken': os.environ.get('WXPusherAppToken'),
                                          'content': '<h1 style=\"color:blue;\">{}</p>'.format(textReturned),
-                                         'summary': 'ICAO：未查询到成绩信息',
+                                         'summary': 'ICAO：未查询到' + os.environ.get('EXAMDATE') + '成绩信息',
                                          'contentType': 2,
                                          'uids': eval(os.environ.get('WXPusherUIDS'))
                                      })
